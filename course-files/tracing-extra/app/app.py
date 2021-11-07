@@ -10,7 +10,7 @@ from jaeger_client import Config
 from flask_opentracing import FlaskTracing
 
 import redis
-import redis_opentracing
+#import redis_opentracing
 
 app = Flask(__name__)
 
@@ -89,7 +89,7 @@ def beta():
 @app.route('/writeredis') # needed to rename this view to avoid function name collision with redis import
 def writeredis():
     # start tracing the redis client
-    redis_opentracing.trace_client(rdb)    
+    # redis_opentracing.trace_client(rdb)
     r = requests.get("https://www.google.com/search?q=python")
     dict = {}
     # put the first 50 results into dict
