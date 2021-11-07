@@ -39,6 +39,18 @@ def init_tracer(service):
 #starter code
 tracer = init_tracer('test-service')
 
+config = Config(
+    config={
+        'sampler':
+        {'type': 'const',
+         'param': 1},
+                        'logging': True,
+                        'reporter_batch_size': 1,},
+                        service_name="service")
+jaeger_tracer = config.initialize_tracer()
+tracing = FlaskTracing(jaeger_tracer, True, app)
+
+
 # not entirely sure but I believe there's a flask_opentracing.init_tracing() missing here
 redis_opentracing.init_tracing(tracer, trace_all_classes=False)
 
